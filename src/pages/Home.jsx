@@ -7,11 +7,14 @@ const Home = () => {
   const [tutorials, setTutorials] = useState();
 
   const url = 'https://axios-example-cw.herokuapp.com/api/tutorials';
+  // Veri cekecegimiz API'nin adresi.
 
   //! GET (Read)
   const getTutorials = async () => {
     try {
       const { data } = await axios.get(url);
+      // await kullanmak icin bu fonksiyonun async olmasi lazim.
+      // veriler data denilen bir objenin icerisinde gelir. bu objeden kurtulmak icin destructing yapariz.
       setTutorials(data);
     } catch (error) {
       console.log(error);
