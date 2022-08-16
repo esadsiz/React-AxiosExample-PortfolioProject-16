@@ -1,6 +1,6 @@
 import AddTutorial from '../components/AddTutorial';
 import TutorialList from '../components/TutorialList';
-import axios from 'axios';
+import axios from 'axios'; // axios'tan axios'u import etmemiz gerekiyor.
 import { useState, useEffect } from 'react';
 
 const Home = () => {
@@ -14,24 +14,23 @@ const Home = () => {
     try {
       const { data } = await axios.get(url);
       // await kullanmak icin bu fonksiyonun async olmasi lazim.
-      // veriler data denilen bir objenin icerisinde gelir. bu objeden kurtulmak icin destructing yapariz.
+      // veriler data denilen bir objenin icerisinde gelir. bu axios'un kendi özelligidir. bu objeden kurtulmak icin destructuring yapariz.
       setTutorials(data);
     } catch (error) {
       console.log(error);
     }
   };
 
-  //? Sadece Component mount oldugunda istek yapar
   useEffect(() => {
     getTutorials();
   }, []);
-
-  console.log(tutorials);
 
   //! POST (Create)
   const addTutorial = async (tutorial) => {
     try {
       await axios.post(url, tutorial);
+      // axios'un post islemi parantez icine 2 parametre alir.
+      // ilki post islemini yapmak istedigimiz url, ikincisi göndermek istedigimiz veri. 
     } catch (error) {
       console.log(error);
     }
@@ -42,6 +41,7 @@ const Home = () => {
   const deleteTutorial = async (id) => {
     try {
       await axios.delete(`${url}/${id}`);
+      // API'ler silme islemini genellikle id'ye göre yaparlar.
     } catch (error) {
       console.log(error);
     }
